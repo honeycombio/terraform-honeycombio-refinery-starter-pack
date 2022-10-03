@@ -1,19 +1,19 @@
 resource "honeycombio_column" "dynsampler_sample_rate_avg" {
-  key_name    = "dynsampler_sample_rate_avg"
-  type        = "float"
-  dataset = var.refinery_metrics_dataset
+  key_name = "dynsampler_sample_rate_avg"
+  type     = "float"
+  dataset  = var.refinery_metrics_dataset
 }
 
 resource "honeycombio_column" "rulessampler_sample_rate_avg" {
-  key_name    = "rulessampler_sample_rate_avg"
-  type        = "float"
-  dataset = var.refinery_metrics_dataset
+  key_name = "rulessampler_sample_rate_avg"
+  type     = "float"
+  dataset  = var.refinery_metrics_dataset
 }
 
 resource "honeycombio_column" "rulessampler_num_dropped" {
-  key_name    = "rulessampler_num_dropped"
-  type        = "float"
-  dataset = var.refinery_metrics_dataset
+  key_name = "rulessampler_num_dropped"
+  type     = "float"
+  dataset  = var.refinery_metrics_dataset
 }
 
 data "honeycombio_query_specification" "refinery-dynsampler-rates" {
