@@ -1,13 +1,13 @@
 resource "honeycombio_column" "libhoney_peer_queue_overflow" {
-  key_name    = "libhoney_peer_queue_overflow"
-  type        = "float"
-  dataset = var.refinery_metrics_dataset
+  key_name = "libhoney_peer_queue_overflow"
+  type     = "float"
+  dataset  = var.refinery_metrics_dataset
 }
 
 resource "honeycombio_column" "libhoney_peer_send_errors" {
-  key_name    = "libhoney_peer_send_errors"
-  type        = "float"
-  dataset = var.refinery_metrics_dataset
+  key_name = "libhoney_peer_send_errors"
+  type     = "float"
+  dataset  = var.refinery_metrics_dataset
 }
 
 
