@@ -1,41 +1,3 @@
-HOW TO SETUP A MODULE: NEXT STEPS: DELETE ME
-==================================
-
-* Review the generated repo: the Terraform code will be added in the root (can start with main.tf -
-  see [TF docs](https://www.terraform.io/language/modules/develop) for more details)
-
-
-* To run terraform and test the module locally: you can add / create config in the `tests/` directory
-
-
-* Please update `examples/` & the README when ready
-
-
-* Run ./docs.sh to generate Terraform Docs for your module
-
-
-* **Create and Add
-  required [SECRETS](https://github.com/honeycombio/terraform-honeycombio-buildevents-starter-pack/settings/secrets/actions)
-  for the Github Workflows to run:**
-  * Add HONEYCOMB_API_KEY that has the required permissions
-
-
-* Open PRs, review, merge!
-
-
-* See [RELEASING.md](RELEASING.md) when ready to Release
-
-
-* Once a GitHub Release is published - Navigate to the Terraform Registry to publish the new module via the UI
-  * This is done **once** - this in turn sets up a **webhook** that will keep the module up to date on subsequent
-    releases
-
-### RESOURCES:
-
-* https://www.terraform.io/language/modules/develop
-
------
-
 TERRAFORM HONEYCOMBIO REFINERY-STARTER-PACK
 ================================================================
 
@@ -45,13 +7,19 @@ TERRAFORM HONEYCOMBIO REFINERY-STARTER-PACK
 This module creates resources like FIXME in [Honeycomb](https://www.honeycomb.io) to kick off exploration
 
 ## Use
+You must have `terraform` installed. Follow [these directions](https://learn.hashicorp.com/tutorials/terraform/install-cli) to install for your platform.
+
+You will need a Honeycomb API key with the adequate permissions to create boards, queries etc.. Once you have the API key, you can set it like so:
 
 The minimal config is:
 
 ```hcl
 module "explore-honeycombio-refinery-starter-pack" {
   source = "honeycombio/refinery-starter-pack/honeycombio"
-  #FIXME 
+
+  refinery_metrics_dataset = "Refinery Metrics" # Optional: defaults to "Refinery Metrics"
+  refinery_logs_dataset = "Refinery Logs" # Optional: defaults to "Refinery Metrics"
+  refinery_cluster_name = "Production" # Optional: defaults to "Production"
 }
 ```
 

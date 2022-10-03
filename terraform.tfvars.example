@@ -1,0 +1,3 @@
+refinery_metrics_dataset = "Refinery Metrics"
+refinery_cluster_name = "Prod"
+honeycomb_api_key = "myhoneycombapikey"
