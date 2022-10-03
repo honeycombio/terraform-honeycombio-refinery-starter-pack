@@ -31,9 +31,21 @@ export HONEYCOMB_API_KEY=$HONEYCOMB_API_KEY
 
 Now you can run `terraform plan/apply` in sequence.
 
+The following board will be added to your Boards page:
+
+![spboard](https://user-images.githubusercontent.com/3537368/193699251-a55119c5-de2a-4a3e-85ba-c0a158f59731.png) ![spboarddetails](https://user-images.githubusercontent.com/3537368/193699592-196a1f31-bd4b-4a9c-a1ea-ce438967ce87.png)
+
 For more config options,
 see [USAGE.md](https://github.com/honeycombio/terraform-honeycombio-refinery-starter-pack/blob/main/USAGE.md)
 .
+
+## Video Walkthrough
+
+Note: Video is muted by default
+
+[HNY-SP-REFOPS.webm](https://user-images.githubusercontent.com/3537368/193695669-5828ef3b-ac90-4571-991e-3536574d7c66.webm)
+
+
 
 ## Examples
 
