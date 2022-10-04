@@ -4,7 +4,7 @@ TERRAFORM HONEYCOMBIO REFINERY-STARTER-PACK
 [![OSS Lifecycle](https://img.shields.io/osslifecycle/honeycombio/terraform-honeycombio-refinery-starter-pack?color=success)](https://github.com/honeycombio/home/blob/main/honeycomb-oss-lifecycle-and-practices.md)
 [![CI](https://github.com/honeycombio/terraform-honeycombio-refinery-starter-pack/actions/workflows/test-terraform-module.yml/badge.svg)](https://github.com/honeycombio/terraform-honeycombio-refinery-starter-pack/actions?query=Test%20Terraform%20Module)
 
-This module creates resources like FIXME in [Honeycomb](https://www.honeycomb.io) to kick off exploration
+This module creates resources like Boards (and someday Triggers and SLOs!) in [Honeycomb](https://www.honeycomb.io) to kick off exploration
 
 ## Use
 You must have `terraform` installed. Follow [these directions](https://learn.hashicorp.com/tutorials/terraform/install-cli) to install for your platform.

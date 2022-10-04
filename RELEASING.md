@@ -8,11 +8,11 @@ This follows the [recommendation from the GitHub Actions team](https://github.co
 
 Follow these steps to create a new release:
 
-* Open the [Releases Page](https://github.com/honeycombio/FIXME/releases).
+* Open the [Releases Page](https://github.com/honeycombio/terraform-honeycombio-refinery-starter-pack/releases).
 
 
 * If there are new changes since the last release, you will see a draft release with notes and a recommended tag / name - this is created by [release-drafter](.github/workflows/release-drafter.yml).
- 
+
 
 * Review and make changes to the content or version number.
 
