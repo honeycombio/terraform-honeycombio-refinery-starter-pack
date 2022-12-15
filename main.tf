@@ -1,15 +1,12 @@
-# Terraform configuration
-
-terraform {
-  required_providers {
-    honeycombio = {
-      source  = "honeycombio/honeycombio"
-      version = ">= 0.10.0"
-    }
-  }
+####################################################
+# Create Dataset to Contain all Required Columns
+####################################################
+resource "honeycombio_dataset" "refinery-logs-dataset" {
+  name        = var.refinery_logs_dataset
+  description = "Dataset for Refinery logs"
 }
 
-provider "honeycombio" {
-  api_key = var.honeycomb_api_key
-  # You can supply this via the environment variable HONEYCOMB_API_KEY or by setting the value in a .tfvars file
+resource "honeycombio_dataset" "refinery-metrics-dataset" {
+  name        = var.refinery_metrics_dataset
+  description = "Dataset for Refinery metrics"
 }
