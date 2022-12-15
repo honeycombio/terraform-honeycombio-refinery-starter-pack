@@ -1,3 +1,46 @@
+resource "honeycombio_column" "collect_cache_buffer_overrun" {
+  key_name = "collect_cache_buffer_overrun"
+  type = "float"
+  dataset = var.refinery_metrics_dataset
+}
+
+resource "honeycombio_column" "memory_inuse" {
+  key_name = "memory_inuse"
+  type = "float"
+  dataset = var.refinery_metrics_dataset
+}
+
+resource "honeycombio_column" "collect_cache_entries_max" {
+  key_name = "collect_cache_entries_max"
+  type = "float"
+  dataset = var.refinery_metrics_dataset
+}
+
+resource "honeycombio_column" "collect_cache_capacity" {
+  key_name = "collect_cache_capacity"
+  type = "float"
+  dataset = var.refinery_metrics_dataset
+}
+
+resource "honeycombio_column" "num_goroutines" {
+  key_name = "num_goroutines"
+  type = "float"
+  dataset = var.refinery_metrics_dataset
+}
+
+resource "honeycombio_column" "process_uptime_seconds" {
+  key_name = "process_uptime_seconds"
+  type = "float"
+  dataset = var.refinery_metrics_dataset
+}
+
+resource "honeycombio_column" "hostname" {
+  key_name = "hostname"
+  type = "float"
+  dataset = var.refinery_metrics_dataset
+}
+
+
 data "honeycombio_query_specification" "refinery-health" {
   calculation {
     op     = "SUM"
@@ -31,6 +74,16 @@ data "honeycombio_query_specification" "refinery-health" {
 
   breakdowns = ["hostname"]
   time_range = 86400
+
+  depends_on = [
+    honeycombio_column.collect_cache_buffer_overrun,
+    honeycombio_column.memory_inuse,
+    honeycombio_column.collect_cache_entries_max,
+    honeycombio_column.collect_cache_capacity,
+    honeycombio_column.num_goroutines,
+    honeycombio_column.process_uptime_seconds,
+    honeycombio_column.hostname,
+  ]
 }
 
 resource "honeycombio_query" "refinery-health-query" {
