@@ -1,3 +1,15 @@
+resource "honeycombio_column" "incoming_router_span" {
+  key_name = "incoming_router_span"
+  type     = "float"
+  dataset  = var.refinery_metrics_dataset
+}
+
+resource "honeycombio_column" "peer_router_batch" {
+  key_name = "peer_router_batch"
+  type     = "float"
+  dataset  = var.refinery_metrics_dataset
+}
+
 data "honeycombio_query_specification" "refinery-intercommunication" {
   calculation {
     op     = "SUM"
@@ -17,6 +29,12 @@ data "honeycombio_query_specification" "refinery-intercommunication" {
 
   breakdowns = ["hostname"]
   time_range = 86400
+
+  depends_on = [
+    honeycombio_column.incoming_router_span,
+    honeycombio_column.peer_router_batch,
+    honeycombio_column.hostname,
+  ]
 }
 
 resource "honeycombio_query" "refinery-intercommunication-query" {

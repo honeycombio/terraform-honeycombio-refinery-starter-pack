@@ -10,6 +10,23 @@ resource "honeycombio_column" "libhoney_peer_send_errors" {
   dataset  = var.refinery_metrics_dataset
 }
 
+resource "honeycombio_column" "libhoney_upstream_queue_length" {
+  key_name = "libhoney_upstream_queue_length"
+  type     = "float"
+  dataset  = var.refinery_metrics_dataset
+}
+
+resource "honeycombio_column" "upstream_enqueue_errors" {
+  key_name = "upstream_enqueue_errors"
+  type     = "float"
+  dataset  = var.refinery_metrics_dataset
+}
+
+resource "honeycombio_column" "upstream_response_errors" {
+  key_name = "upstream_response_errors"
+  type     = "float"
+  dataset  = var.refinery_metrics_dataset
+}
 
 data "honeycombio_query_specification" "refinery-send-buffers" {
   calculation {
@@ -43,6 +60,10 @@ data "honeycombio_query_specification" "refinery-send-buffers" {
   depends_on = [
     honeycombio_column.libhoney_peer_queue_overflow,
     honeycombio_column.libhoney_peer_send_errors,
+    honeycombio_column.libhoney_upstream_queue_length,
+    honeycombio_column.upstream_enqueue_errors,
+    honeycombio_column.upstream_response_errors,
+    honeycombio_column.hostname,
   ]
 }
 

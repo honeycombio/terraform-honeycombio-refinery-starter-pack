@@ -15,10 +15,3 @@ variable "refinery_cluster_name" {
   type        = string
   default     = "Production"
 }
-
-variable "honeycomb_api_key" {
-  description = "Honeycomb API key"
-  type        = string
-  default     = null
-  # You can supply this via the environment variable HONEYCOMB_API_KEY or by setting the value in a .tfvars file
-}
