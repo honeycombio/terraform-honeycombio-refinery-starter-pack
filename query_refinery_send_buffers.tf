@@ -12,20 +12,20 @@ resource "honeycombio_column" "libhoney_peer_send_errors" {
 
 resource "honeycombio_column" "libhoney_upstream_queue_length" {
   key_name = "libhoney_upstream_queue_length"
-  type = "float"
-  dataset = var.refinery_metrics_dataset
+  type     = "float"
+  dataset  = var.refinery_metrics_dataset
 }
 
 resource "honeycombio_column" "upstream_enqueue_errors" {
   key_name = "upstream_enqueue_errors"
-  type = "float"
-  dataset = var.refinery_metrics_dataset
+  type     = "float"
+  dataset  = var.refinery_metrics_dataset
 }
 
 resource "honeycombio_column" "upstream_response_errors" {
   key_name = "upstream_response_errors"
-  type = "float"
-  dataset = var.refinery_metrics_dataset
+  type     = "float"
+  dataset  = var.refinery_metrics_dataset
 }
 
 data "honeycombio_query_specification" "refinery-send-buffers" {

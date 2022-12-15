@@ -1,19 +1,19 @@
 resource "honeycombio_column" "trace_accepted" {
   key_name = "trace_accepted"
-  type = "float"
-  dataset = var.refinery_metrics_dataset
+  type     = "float"
+  dataset  = var.refinery_metrics_dataset
 }
 
 resource "honeycombio_column" "trace_send_dropped" {
   key_name = "trace_send_dropped"
-  type = "float"
-  dataset = var.refinery_metrics_dataset
+  type     = "float"
+  dataset  = var.refinery_metrics_dataset
 }
 
 resource "honeycombio_column" "trace_send_kept" {
   key_name = "trace_send_kept"
-  type = "float"
-  dataset = var.refinery_metrics_dataset
+  type     = "float"
+  dataset  = var.refinery_metrics_dataset
 }
 
 data "honeycombio_query_specification" "refinery-sampling-decision" {

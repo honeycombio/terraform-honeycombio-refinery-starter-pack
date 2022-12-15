@@ -1,13 +1,13 @@
 resource "honeycombio_column" "incoming_router_span" {
   key_name = "incoming_router_span"
-  type = "float"
-  dataset = var.refinery_metrics_dataset
+  type     = "float"
+  dataset  = var.refinery_metrics_dataset
 }
 
 resource "honeycombio_column" "peer_router_batch" {
   key_name = "peer_router_batch"
-  type = "float"
-  dataset = var.refinery_metrics_dataset
+  type     = "float"
+  dataset  = var.refinery_metrics_dataset
 }
 
 data "honeycombio_query_specification" "refinery-intercommunication" {
