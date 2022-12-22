@@ -1,7 +1,12 @@
 module "honeycombio-refinery-starter-pack" {
   source = "../"
 
-  refinery_metrics_dataset = "Refinery Metrics" # Optional: defaults to "Refinery Metrics"
-  refinery_logs_dataset = "Refinery Logs" # Optional: defaults to "Refinery Metrics"
-  refinery_cluster_name = "Production" # Optional: defaults to "Production"
+  refinery_cluster_name    = "Test"
+  create_columns           = true
+  create_datasets          = true
+}
+
+output "refinery_operations_board" {
+  value       = module.honeycombio-refinery-starter-pack.refinery_operations_board_url
+  description = "URL for accessing the \"Refinery Operations\" board in the Honeycomb UI"
 }

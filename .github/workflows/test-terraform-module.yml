@@ -20,6 +20,12 @@ jobs:
       - name: Set Honeycomb API Key environment variable
         run: echo "HONEYCOMB_API_KEY=${{ secrets.HONEYCOMB_API_KEY }}" >> $GITHUB_ENV
 
+      - name: Create unique Dataset name for required columns dataset name
+        run: echo "RMDSETNAME=refmetrics_$(date +%s)" >> $GITHUB_ENV
+
+      - name: Create unique Dataset name for required columns dataset name
+        run: echo "RLDSETNAME=reflogs_$(date +%s)" >> $GITHUB_ENV
+
       - name: Terraform Init
         run: terraform init
 
@@ -27,7 +33,7 @@ jobs:
         run: terraform validate -no-color
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve -no-color
+        run: terraform apply -auto-approve -no-color -var "refinery_metrics_dataset=${{ env.RMDSETNAME }}" -var "refinery_logs_dataset=${{ env.RLDSETNAME }}"
 
       - name: Terraform Destroy
-        run: terraform destroy -auto-approve -no-color
+        run: terraform destroy -auto-approve -no-color -var "refinery_metrics_dataset=${{ env.RMDSETNAME }}" -var "refinery_logs_dataset=${{ env.RLDSETNAME }}"

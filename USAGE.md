@@ -3,60 +3,43 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_honeycombio"></a> [honeycombio](#requirement\_honeycombio) | ~> 0.10.0 |
+| <a name="requirement_honeycombio"></a> [honeycombio](#requirement\_honeycombio) | >= 0.12.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_honeycombio"></a> [honeycombio](#provider\_honeycombio) | ~> 0.10.0 |
+| <a name="provider_honeycombio"></a> [honeycombio](#provider\_honeycombio) | >= 0.12.0 |
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_metrics_columns"></a> [metrics\_columns](#module\_metrics\_columns) | ./modules/columns | n/a |
+| <a name="module_metrics_queries"></a> [metrics\_queries](#module\_metrics\_queries) | ./modules/metrics_queries | n/a |
 
 ## Resources
 
 | Name | Type |
 |------|------|
 | [honeycombio_board.refinery](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/resources/board) | resource |
-| [honeycombio_column.dynsampler_sample_rate_avg](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/resources/column) | resource |
-| [honeycombio_column.libhoney_peer_queue_overflow](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/resources/column) | resource |
-| [honeycombio_column.libhoney_peer_send_errors](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/resources/column) | resource |
-| [honeycombio_column.rulessampler_num_dropped](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/resources/column) | resource |
-| [honeycombio_column.rulessampler_sample_rate_avg](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/resources/column) | resource |
-| [honeycombio_query.refinery-dynsampler-rates-query](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/resources/query) | resource |
-| [honeycombio_query.refinery-health-query](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/resources/query) | resource |
-| [honeycombio_query.refinery-intercommunication-query](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/resources/query) | resource |
-| [honeycombio_query.refinery-receive-buffers-query](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/resources/query) | resource |
-| [honeycombio_query.refinery-sampling-decision-query](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/resources/query) | resource |
-| [honeycombio_query.refinery-send-buffers-query](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/resources/query) | resource |
-| [honeycombio_query.refinery-trace-indicators-query](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/resources/query) | resource |
-| [honeycombio_query_annotation.refinery-dynsampler-rates-query](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/resources/query_annotation) | resource |
-| [honeycombio_query_annotation.refinery-health-query](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/resources/query_annotation) | resource |
-| [honeycombio_query_annotation.refinery-intercommunication-query](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/resources/query_annotation) | resource |
-| [honeycombio_query_annotation.refinery-receive-buffers-query](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/resources/query_annotation) | resource |
-| [honeycombio_query_annotation.refinery-sampling-decision-query](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/resources/query_annotation) | resource |
-| [honeycombio_query_annotation.refinery-send-buffers-query](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/resources/query_annotation) | resource |
-| [honeycombio_query_annotation.refinery-trace-indicators-query](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/resources/query_annotation) | resource |
-| [honeycombio_query_specification.refinery-dynsampler-rates](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/data-sources/query_specification) | data source |
-| [honeycombio_query_specification.refinery-health](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/data-sources/query_specification) | data source |
-| [honeycombio_query_specification.refinery-intercommunication](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/data-sources/query_specification) | data source |
-| [honeycombio_query_specification.refinery-receive-buffers](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/data-sources/query_specification) | data source |
-| [honeycombio_query_specification.refinery-sampling-decision](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/data-sources/query_specification) | data source |
-| [honeycombio_query_specification.refinery-send-buffers](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/data-sources/query_specification) | data source |
-| [honeycombio_query_specification.refinery-trace-indicators](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/data-sources/query_specification) | data source |
+| [honeycombio_dataset.refinery-logs-dataset](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/resources/dataset) | resource |
+| [honeycombio_dataset.refinery-metrics-dataset](https://registry.terraform.io/providers/honeycombio/honeycombio/latest/docs/resources/dataset) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_honeycomb_api_key"></a> [honeycomb\_api\_key](#input\_honeycomb\_api\_key) | Honeycomb API key | `string` | `null` | no |
+| <a name="input_create_columns"></a> [create\_columns](#input\_create\_columns) | Have the module create columns in the dataset if they don't exist | `bool` | `false` | no |
+| <a name="input_create_datasets"></a> [create\_datasets](#input\_create\_datasets) | Have the module create the datasets if they don't exist | `bool` | `false` | no |
 | <a name="input_refinery_cluster_name"></a> [refinery\_cluster\_name](#input\_refinery\_cluster\_name) | Name of the refinery cluster | `string` | `"Production"` | no |
 | <a name="input_refinery_logs_dataset"></a> [refinery\_logs\_dataset](#input\_refinery\_logs\_dataset) | Dataset to use for refinery logs | `string` | `"Refinery Logs"` | no |
 | <a name="input_refinery_metrics_dataset"></a> [refinery\_metrics\_dataset](#input\_refinery\_metrics\_dataset) | Dataset to use for refinery metrics | `string` | `"Refinery Metrics"` | no |
+| <a name="input_time_range"></a> [time\_range](#input\_time\_range) | The default time range for queries in the Refinery metrics board - Defaults to 86400 seconds (24hours) | `number` | `86400` | no |
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_refinery_operations_board_url"></a> [refinery\_operations\_board\_url](#output\_refinery\_operations\_board\_url) | URL for accessing the "Refinery Operations" board in the Honeycomb UI |
 <!-- END_TF_DOCS -->
