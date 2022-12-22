@@ -1,5 +1,18 @@
+<a name="v0.3.0"></a>
+## [v0.3.0 🌈 (v0.3.0)](https://github.com/honeycombio/terraform-honeycombio-refinery-starter-pack/releases/tag/v0.3.0) - 22 Dec 2022
+
+## Changes
+
+## 🚀 Features
+
+- Major updates for better usage with 0.12.0 Honeycomb Provider [@tdarwin](https://github.com/tdarwin) ([#10](https://github.com/honeycombio/terraform-honeycombio-refinery-starter-pack/issues/10))
+
+
+[Changes][v0.3.0]
+
+
 <a name="v0.2.0"></a>
-# [v0.2.0 🌈 (v0.2.0)](https://github.com/honeycombio/terraform-honeycombio-refinery-starter-pack/releases/tag/v0.2.0) - 15 Dec 2022
+## [v0.2.0 🌈 (v0.2.0)](https://github.com/honeycombio/terraform-honeycombio-refinery-starter-pack/releases/tag/v0.2.0) - 15 Dec 2022
 
 ## Changes
 
@@ -8,11 +21,12 @@
 - Update to remove provider and api-key-reference. Add dataset creation [@tdarwin](https://github.com/tdarwin) ([#8](https://github.com/honeycombio/terraform-honeycombio-refinery-starter-pack/issues/8))
 
 
+
 [Changes][v0.2.0]
 
 
 <a name="v0.1.1"></a>
-# [v0.1.1 🌈 (v0.1.1)](https://github.com/honeycombio/terraform-honeycombio-refinery-starter-pack/releases/tag/v0.1.1) - 07 Oct 2022
+## [v0.1.1 🌈 (v0.1.1)](https://github.com/honeycombio/terraform-honeycombio-refinery-starter-pack/releases/tag/v0.1.1) - 07 Oct 2022
 
 ## Changes
 
@@ -25,7 +39,7 @@
 
 
 <a name="v0.1.0"></a>
-# [v0.1.0 🌈 (v0.1.0)](https://github.com/honeycombio/terraform-honeycombio-refinery-starter-pack/releases/tag/v0.1.0) - 04 Oct 2022
+## [v0.1.0 🌈 (v0.1.0)](https://github.com/honeycombio/terraform-honeycombio-refinery-starter-pack/releases/tag/v0.1.0) - 04 Oct 2022
 
 ## Changes
 
@@ -36,6 +50,7 @@
 [Changes][v0.1.0]
 
 
+[v0.3.0]: https://github.com/honeycombio/terraform-honeycombio-refinery-starter-pack/compare/v0.2.0...v0.3.0
 [v0.2.0]: https://github.com/honeycombio/terraform-honeycombio-refinery-starter-pack/compare/v0.1.1...v0.2.0
 [v0.1.1]: https://github.com/honeycombio/terraform-honeycombio-refinery-starter-pack/compare/v0.1.0...v0.1.1
 [v0.1.0]: https://github.com/honeycombio/terraform-honeycombio-refinery-starter-pack/tree/v0.1.0
