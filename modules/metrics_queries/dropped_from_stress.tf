@@ -20,7 +20,7 @@ data "honeycombio_query_specification" "dropped-from-stress" {
 # Implement the Query Using the Specification
 ####################################################
 resource "honeycombio_query" "dropped-from-stress-query" {
-  count   = var.contains_stress_level ? 1 : 0
+  count      = var.contains_stress_level ? 1 : 0
   dataset    = var.dataset_name
   query_json = data.honeycombio_query_specification.dropped-from-stress.json
 }
@@ -29,7 +29,7 @@ resource "honeycombio_query" "dropped-from-stress-query" {
 # Attach an Annotation to the Query to Explain What it Does
 ################################################################
 resource "honeycombio_query_annotation" "dropped-from-stress-query" {
-  count    = var.contains_stress_level ? 1 : 0
+  count       = var.contains_stress_level ? 1 : 0
   dataset     = var.dataset_name
   query_id    = honeycombio_query.dropped-from-stress-query[0].id
   name        = "Dropped from Stress"

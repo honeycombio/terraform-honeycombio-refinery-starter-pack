@@ -6,9 +6,9 @@ data "honeycombio_query_specification" "stress-relief-log" {
     op = "COUNT"
   }
   filter {
-    column    = "msg"
-    op  = "contains"
-    value = "StressRelief"
+    column = "msg"
+    op     = "contains"
+    value  = "StressRelief"
   }
   breakdowns = ["hostname", "reason", "msg"]
   time_range = var.time_range

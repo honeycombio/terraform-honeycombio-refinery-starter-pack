@@ -7,18 +7,18 @@ data "honeycombio_query_specification" "error-log" {
   }
 
   filter {
-    column   = "error"
-    op = "exists"
+    column = "error"
+    op     = "exists"
   }
 
   filter {
-    column   = "error.err"
-    op = "exists"
+    column = "error.err"
+    op     = "exists"
   }
 
   filter {
-    column   = "error.msg"
-    op = "exists"
+    column = "error.msg"
+    op     = "exists"
   }
 
   filter_combination = "OR"

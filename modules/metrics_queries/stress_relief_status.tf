@@ -20,7 +20,7 @@ data "honeycombio_query_specification" "stress-relief-status" {
 # Implement the Query Using the Specification
 ####################################################
 resource "honeycombio_query" "stress-relief-status-query" {
-  count   = var.contains_stress_level ? 1 : 0
+  count      = var.contains_stress_level ? 1 : 0
   dataset    = var.dataset_name
   query_json = data.honeycombio_query_specification.stress-relief-status.json
 }
@@ -29,7 +29,7 @@ resource "honeycombio_query" "stress-relief-status-query" {
 # Attach an Annotation to the Query to Explain What it Does
 ################################################################
 resource "honeycombio_query_annotation" "stress-relief-status-query" {
-  count    = var.contains_stress_level ? 1 : 0
+  count       = var.contains_stress_level ? 1 : 0
   dataset     = var.dataset_name
   query_id    = honeycombio_query.stress-relief-status-query[0].id
   name        = "Stress Relief Status"
