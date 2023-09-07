@@ -19,12 +19,12 @@ data "honeycombio_query_specification" "refinery-send-buffers" {
 
   calculation {
     op     = "SUM"
-    column = "upstream_enqueue_errors"
+    column = "libhoney_upstream_enqueue_errors"
   }
 
   calculation {
     op     = "SUM"
-    column = "upstream_response_errors"
+    column = "libhoney_upstream_response_errors"
   }
 
   breakdowns = ["hostname"]
