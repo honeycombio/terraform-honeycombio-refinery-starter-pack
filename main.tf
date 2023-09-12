@@ -12,44 +12,25 @@ resource "honeycombio_dataset" "refinery-metrics-dataset" {
   name        = var.refinery_metrics_dataset
   description = "Dataset for Refinery metrics"
 }
-
 ####################################################
-# Create Columns in the Metrics Dataset
+# Create Columns For Queries
 ####################################################
-module "metrics_columns" {
-  source       = "./modules/columns"
-  count        = var.create_columns ? 1 : 0
-  dataset_name = var.refinery_metrics_dataset
-  columns = {
-    "dynsampler_sample_rate_avg"     = "float",
-    "rulessampler_sample_rate_avg"   = "float",
-    "rulessampler_num_dropped"       = "float",
-    "incoming_router_span"           = "float",
-    "peer_router_batch"              = "float",
-    "hostname"                       = "string",
-    "collect_cache_buffer_overrun"   = "float",
-    "memory_inuse"                   = "float",
-    "collect_cache_entries_max"      = "float",
-    "collect_cache_capacity"         = "float",
-    "num_goroutines"                 = "float",
-    "process_uptime_seconds"         = "float",
-    "incoming_router_dropped"        = "float",
-    "peer_router_dropped"            = "float",
-    "trace_accepted"                 = "float",
-    "trace_send_dropped"             = "float",
-    "trace_send_kept"                = "float",
-    "libhoney_peer_queue_overflow"   = "float",
-    "libhoney_peer_send_errors"      = "float",
-    "libhoney_upstream_queue_length" = "float",
-    "upstream_enqueue_errors"        = "float",
-    "upstream_response_errors"       = "float",
-    "trace_sent_cache_hit"           = "float",
-    "trace_send_no_root"             = "float",
-  }
+data "honeycombio_columns" "metrics" {
+  dataset = var.refinery_metrics_dataset
+}
 
-  depends_on = [
-    honeycombio_dataset.refinery-metrics-dataset
-  ]
+data "honeycombio_columns" "logs" {
+  dataset = var.refinery_logs_dataset
+}
+
+module "columns" {
+  source = "./modules/columns"
+
+  metrics_dataset = var.refinery_metrics_dataset
+  logs_dataset    = var.refinery_logs_dataset
+
+  metrics_columns = local.contains_r2_metrics ? local.contains_otel_metrics ? flatten(setsubtract(local.otel_metrics_columns, data.honeycombio_columns.metrics.names)) : flatten(setsubtract(local.metrics_columns_r2, data.honeycombio_columns.metrics.names)) : flatten(setsubtract(local.metrics_columns_r1, data.honeycombio_columns.metrics.names))
+  logs_columns    = flatten(setsubtract(local.logs_columns, data.honeycombio_columns.logs.names))
 }
 
 ####################################################
@@ -59,9 +40,26 @@ module "metrics_queries" {
   source       = "./modules/metrics_queries"
   dataset_name = var.refinery_metrics_dataset
 
+  contains_stress_level = contains(data.honeycombio_columns.metrics.names, "stress_level")
+  contains_otel_metrics = local.contains_otel_metrics
+  sampler_columns       = local.contains_r2_metrics ? local.contains_otel_metrics ? setintersection(local.sampler_otel_metrics_columns, data.honeycombio_columns.metrics.names) : setintersection(local.sampler_r2_metrics_columns, data.honeycombio_columns.metrics.names) : setintersection(local.sampler_r1_metrics_columns, data.honeycombio_columns.metrics.names)
+
   depends_on = [
     honeycombio_dataset.refinery-metrics-dataset,
-    module.metrics_columns
+    module.columns,
+  ]
+}
+
+####################################################
+# Create Queries Against Logs Dataset
+####################################################
+module "logs_queries" {
+  source       = "./modules/logs_queries"
+  dataset_name = var.refinery_logs_dataset
+
+  depends_on = [
+    honeycombio_dataset.refinery-logs-dataset,
+    module.columns,
   ]
 }
 
@@ -71,9 +69,34 @@ module "metrics_queries" {
 resource "honeycombio_board" "refinery" {
   name  = "${var.refinery_cluster_name} Refinery Operations"
   style = "visual"
+
+  dynamic "query" {
+    for_each = contains(data.honeycombio_columns.metrics.names, "stress_level") ? ["srs", "dfs"] : []
+
+    content {
+      query_id            = query.value == "srs" ? module.metrics_queries.stress-relief-status-query-id : module.metrics_queries.dropped-from-stress-query-id
+      query_annotation_id = query.value == "srs" ? module.metrics_queries.stress-relief-status-query-annotation-id : module.metrics_queries.dropped-from-stress-query-annotation-id
+    }
+  }
+
+  dynamic "query" {
+    for_each = contains(data.honeycombio_columns.metrics.names, "stress_level") ? ["stress-relief-log"] : []
+
+    content {
+      query_id            = module.logs_queries.stress-relief-log-query-id
+      query_annotation_id = module.logs_queries.stress-relief-log-query-annotation-id
+      query_style         = "table"
+    }
+  }
+
   query {
-    query_id            = module.metrics_queries.refinery-health-query-id
-    query_annotation_id = module.metrics_queries.refinery-health-query-annotation-id
+    query_id            = module.metrics_queries.cache-health-query-id
+    query_annotation_id = module.metrics_queries.cache-health-query-annotation-id
+  }
+
+  query {
+    query_id            = module.metrics_queries.cache-ejections-query-id
+    query_annotation_id = module.metrics_queries.cache-ejections-query-annotation-id
   }
 
   query {
@@ -92,8 +115,13 @@ resource "honeycombio_board" "refinery" {
   }
 
   query {
-    query_id            = module.metrics_queries.refinery-dynsampler-rates-query-id
-    query_annotation_id = module.metrics_queries.refinery-dynsampler-rates-query-annotation-id
+    query_id            = module.logs_queries.error-log-query-id
+    query_annotation_id = module.logs_queries.error-log-query-annotation-id
+  }
+
+  query {
+    query_id            = module.metrics_queries.refinery-sampler-rates-query-id
+    query_annotation_id = module.metrics_queries.refinery-sampler-rates-query-annotation-id
   }
 
   query {
@@ -108,7 +136,9 @@ resource "honeycombio_board" "refinery" {
 
   depends_on = [
     honeycombio_dataset.refinery-metrics-dataset,
-    module.metrics_columns,
+    honeycombio_dataset.refinery-logs-dataset,
+    module.columns,
     module.metrics_queries,
+    module.logs_queries,
   ]
 }

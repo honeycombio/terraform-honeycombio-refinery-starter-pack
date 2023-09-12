@@ -23,7 +23,7 @@ variable "create_datasets" {
 }
 
 variable "create_columns" {
-  description = "Have the module create columns in the dataset if they don't exist"
+  description = "[Deprecated - Unused] Have the module create columns in the dataset if they don't exist"
   type        = bool
   default     = false
 }
