@@ -25,6 +25,8 @@ EOF
 
       curl https://api.honeycomb.io/1/events/$HONEYCOMB_DATASET -X POST \
         -H "X-Honeycomb-Team: $HONEYCOMB_API_KEY" -d @metrics-event.json
+
+      sleep 15
     EOT
   }
 }
@@ -48,6 +50,8 @@ EOF
 
       curl https://api.honeycomb.io/1/events/$HONEYCOMB_DATASET -X POST \
         -H "X-Honeycomb-Team: $HONEYCOMB_API_KEY" -d @logs-event.json
+
+      sleep 15
     EOT
   }
 }
