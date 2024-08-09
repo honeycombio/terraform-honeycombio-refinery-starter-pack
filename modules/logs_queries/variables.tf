@@ -9,15 +9,3 @@ variable "time_range" {
   type        = number
   default     = 86400
 }
-
-variable "contains_stress_level" {
-  type = bool
-}
-
-variable "sampler_columns" {
-  type = list(string)
-}
-
-variable "contains_otel_metrics" {
-  type = bool
-}

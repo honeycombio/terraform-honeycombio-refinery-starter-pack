@@ -2,7 +2,6 @@ module "honeycombio-refinery-starter-pack" {
   source = "../"
 
   refinery_cluster_name    = "Test"
-  create_columns           = true
   create_datasets          = true
 }
 
